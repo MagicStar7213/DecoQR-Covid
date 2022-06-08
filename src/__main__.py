@@ -26,7 +26,14 @@ def file():
     file = filedialog.askopenfilename(title='Select Image', filetypes=pv.filetypes)
     filename = os.path.abspath(file)
     filename = filename.replace('\\', '/')
-    decode_qr(filename)
+    if filename != None:
+        decode_qr(filename)
+    else:
+        print(bc.FAIL+"ERROR"+bc.ENDC + "Try again?")
+        tryag = input()
+        if tryag == 'yes':
+            restart('file')
+
 
 def wcam():
     cap = cv2.VideoCapture(0)
@@ -47,7 +54,7 @@ def wcam():
         cv2.imshow('QR Code Scanner', img)
         if cv2.waitKey(1) == ord('q'):
             break
-    cap.release(data)
+    cap.release()
     cv2.destroyAllWindows()
 
 def decode_qr(filename):
@@ -63,6 +70,19 @@ def decode_qr(filename):
         decoded = cbor2.loads(deco)
         pprint(cbor2.loads(decoded.value[2]))
 
-print("Hi! This is a European COVID Digital Certificate scanner. You can attach a file or use your webcam!")
-print("If you want to decode an existing image, type file, and if you want to sacn through your webcam, type wcam")
+def restart(func) :
+    if func == 'file' :
+        file()
+    if func == 'wcam' :
+        wcam()
+
+print("This app is by default in english, but you can also set other languages. Set one of the following:")
+print("English [en], Spanish [es]: ")
+lang = input()
+if lang == 'es':
+    print("¡Hola! Esto es un Escáner del Certificado COVID Digital Europeo. ¡Puedes abrir una imagen o incluso usar la cámara!")
+    print("Si prefieres la images, escribe file, pero si prefieres la cámara, escribe wcam")
+if lang == 'en':
+    print("Hi! This is a European COVID Digital Certificate scanner. You can attach a file or use your webcam!")
+    print("If you want to decode an existing image, type file, and if you want to scan through your webcam, type wcam")
 input_op()
