@@ -23,4 +23,5 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.5",
+    requires=["setuptools>=42", "pyzbar>=0.1.8", "opencv-python>=4.4.0.46", "base45>=0.4.0", "cbor2>=5.2.0"]
 )
