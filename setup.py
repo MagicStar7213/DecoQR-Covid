@@ -1,9 +1,9 @@
-import setuptools
+from setuptools import setup, find_packages
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name="decoqr-covid",
     version="0.1.0",
     author="Example Author",
@@ -20,8 +20,8 @@ setuptools.setup(
         "License :: OSI Approved :: GNU Affero General Public License v3.0",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "qrdecode"},
+    packages=find_packages(where="qrdecode"),
     python_requires=">=3.5",
-    requires=["setuptools>=42", "pyzbar>=0.1.8", "opencv-python>=4.4.0.46", "base45>=0.4.0", "cbor2>=5.2.0"]
+    install_requires=["setuptools>=42", "pyzbar>=0.1.8", "opencv-python>=4.4.0.46", "base45>=0.4.0", "cbor2>=5.2.0"]
 )
